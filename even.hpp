@@ -1,5 +1,7 @@
 #pragma once
 
-bool isEven(int value) {
-    return (value & 1) == 0;
+namespace task1 {
+    bool isEven(int value) {
+        return (value & 1) == 0;
+    }
 }

@@ -5,31 +5,57 @@
 #include "fifo.hpp"
 #include "sort.hpp"
 
-int main() {
-    assert(!isEven(5));
-    assert(isEven(6));
+void test_even() {
+    assert(!task1::isEven(5));
+    assert(task1::isEven(6));
+    assert(task1::isEven(1378));
+    assert(!task1::isEven(-111111));
+    assert(task1::isEven(0));
+}
 
-    auto queue = FIFO<int>();
-    queue.append(5);
-    int temp = 6;
-    queue.append(temp);
-    int ans1 = queue.pop();
-    int ans2 = queue.pop();
-    assert(ans1 == 5 && ans2 == 6);
+void test_fifo() {
+    size_t N = 5;
+    int inputs[5] = {8, -1, 0, 999, 10};
 
-    auto queue2 = FIFO2<int>();
-    queue2.append(5);
-    queue2.append(temp);
-    ans1 = queue2.pop();
-    ans2 = queue2.pop();
-    assert(ans1 == 5 && ans2 == 6);
+    auto queue = task2::FIFOLinkedList<int>();
+    for (size_t i = 0; i < N; ++i) {
+        queue.append(inputs[i]);
+    }
 
+    for (size_t i = 0; i < N; ++i) {
+        auto result = queue.pop();
+        assert(result == inputs[i]);
+    }
+
+    auto queue2 = task2::FIFOArray<int>();
+    for (size_t i = 0; i < N; ++i) {
+        queue2.append(inputs[i]);
+    }
+
+    for (size_t i = 0; i < N; ++i) {
+        auto result = queue2.pop();
+        assert(result == inputs[i]);
+    }
+}
+
+void test_sort() {
     const size_t length = 5;
     int arr[length] {8, 10, 2, 4, 0};
-    merge_sort(arr, 0, length-1);
+
+    task3::merge_sort(arr, 0, length-1);
+
     int sorted_array[length] {0, 2, 4, 8, 10};
+
     for (size_t i = 0; i<length; ++i) {
         assert(arr[i] == sorted_array[i]);
     }
+}
+
+
+int main() {
+    test_even();
+    test_fifo();
+    test_sort();
+
     return 0;
 }
