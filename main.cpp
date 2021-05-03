@@ -22,14 +22,28 @@ void test_fifo() {
         queue.append(inputs[i]);
     }
 
+    assert(queue[2] == inputs[2]);
+
+    auto queue_copy = queue;
+    for (size_t i = 0; i < N; ++i) {
+        assert(queue[i] == queue_copy[i]);
+    }
+
     for (size_t i = 0; i < N; ++i) {
         auto result = queue.pop();
         assert(result == inputs[i]);
     }
 
-    auto queue2 = task2::FIFOArray<int>();
+    auto queue2 = task2::FIFOStaticArray<int>();
     for (size_t i = 0; i < N; ++i) {
         queue2.append(inputs[i]);
+    }
+
+    assert(queue2[2] == inputs[2]);
+
+    auto queue2_copy = queue2;
+    for (size_t i = 0; i < N; ++i) {
+        assert(queue2[i] == queue2_copy[i]);
     }
 
     for (size_t i = 0; i < N; ++i) {
