@@ -1,7 +1,6 @@
 #pragma once
 
 
-// На базе односвязного списка, добавление и удаление за О(1)
 template <typename T>
 struct FIFO {
 public:
@@ -63,9 +62,6 @@ private:
 };
 
 
-// реализовано на массиве - pop() за O(n), append() за O(1), но нет указателей
-// и может быть в каком-то смысле проще для понимания
-// для простоты
 template <typename T>
 class FIFO2 {
 public:
